@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const Navbar = () => {
+  const {userLogOut}= useContext(AuthContext)
+  const handelLogOut = ()=>{
+    userLogOut()
+    .then(result =>{
+        console.log(result.user);
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}
     return (
         <div className="navbar bg-sky-300">
   <div className="navbar-start">
@@ -37,7 +48,7 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end p-4">
-    <a className="">Login</a>
+    <button onClick={handelLogOut}><a className="">LogOut</a></button>
   </div>
 </div>
     );
