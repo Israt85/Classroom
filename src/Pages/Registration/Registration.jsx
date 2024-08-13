@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
+import axios from 'axios';
 
 const Registration = () => {
     const {userSignup,updateUserProfile} = useContext(AuthContext)
@@ -24,20 +25,19 @@ const Registration = () => {
                    email : data.email
                 }
                 
-                // axiosPublic.post('/users', userInfo)
-                // .then(res =>{
-                //    if(res.data.insertedId){
-                //        console.log('user added');
-                //        Swal.fire({
-                //            position: "top-end",
-                //            icon: "success",
-                //            title: "User created succesfully",
-                //            showConfirmButton: false,
-                //            timer: 1500
-                //          });
-                //    }
+                axios.post('http://localhost:5000/user', userInfo)
+                .then(res =>{
+                   if(res.data.insertedId){
+                       console.log('user added');
+                   }
                    nevigate(location?.state ? location.state : "/")
                 })
+                .catch(err =>{
+                   console.log(err);
+                })
+               
+           })
+            
                 .catch(err =>{
                    console.log(err);
                 })

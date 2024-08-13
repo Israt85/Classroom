@@ -1,8 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const {userLogOut}= useContext(AuthContext)
+  const {user,userLogOut}= useContext(AuthContext)
+  const [isDropdownVisible, setDropdownVisibility] = useState(false);
   const handelLogOut = ()=>{
     userLogOut()
     .then(result =>{
@@ -12,6 +14,7 @@ const Navbar = () => {
         console.log(err);
     })
 }
+
     return (
         <div className="navbar bg-sky-300">
   <div className="navbar-start">
@@ -47,9 +50,15 @@ const Navbar = () => {
       <li><a>Item 3</a></li>
     </ul>
   </div>
-  <div className="navbar-end p-4">
-    <button onClick={handelLogOut}><a className="">LogOut</a></button>
-  </div>
+  {
+    user? <div className='ml-32'> <details className="dropdown">
+    <summary><img className='w-12 h-12 rounded-full' src={user?.photoURL} alt="" /> </summary>
+    <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-40 h-auto p-2 my-2 shadow">
+      <Link to='/dashboard'><button className='p-4'>Dashboard</button></Link>
+     <button onClick={handelLogOut}>Logout</button>
+    </ul>
+  </details></div>: <div className='mx-40'><Link to='login'>Login</Link></div>
+  }
 </div>
     );
 };
