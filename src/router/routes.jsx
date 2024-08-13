@@ -6,6 +6,7 @@ import Registration from "../Pages/Registration/Registration";
 import Dashboard from "../Layout/Dashboard/Dashboard";
 import AllStudents from "../Components/Dashboard/AllStudents/AllStudents";
 import ClassRoom from "../Components/Dashboard/ClassRoom/ClassRoom";
+import AllTeachers from "../Components/Dashboard/AllTeachers/AllTeachers";
 
 const router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
         {
           path:'createclassroom',
           element:<ClassRoom></ClassRoom>
+        },
+        {
+          path:'allteacher',
+          element: <AllTeachers></AllTeachers>
         }
       ]
     }

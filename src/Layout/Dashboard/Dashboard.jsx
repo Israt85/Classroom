@@ -42,7 +42,7 @@ const Dashboard = () => {
                     admin && (
                         <>
                             <Link to='/dashboard/allstudent'><li className='list-none py-4'>All Students</li></Link>
-                            <Link to='/dashboard/allteachers'><li className='list-none py-4'>All Teachers</li></Link>
+                            <Link to='/dashboard/allteacher'><li className='list-none py-4'>All Teachers</li></Link>
                             <Link to='/dashboard/createclassroom'><li className='list-none py-4'>Create ClassRoom</li></Link>
                         </>
                     )

@@ -1,22 +1,20 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-const AllStudents = () => {
-    const [students, setStudents] = useState([]);
-    
-    useEffect(() => {
+const AllTeachers = () => {
+    const [teachers,setTeachers]= useState();
+    useEffect(()=>{
         axios.get('http://localhost:5000/user')
-            .then(res => {
-                console.log(res.data);
-                // Filter out any users with the role of 'Admin'
-                const nonAdminStudents = res.data.filter(stu => stu.role == '');
-                setStudents(nonAdminStudents);
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }, []);
-    
+        .then(res => {
+            console.log(res.data);
+            // Filter out any users with the role of 'Admin'
+            const nonAdminStudents = res.data.filter(stu => stu.role == 'teacher');
+            setTeachers(nonAdminStudents);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    },[])
     return (
         <div className="overflow-x-auto">
             <table className="table-auto w-full">
@@ -29,11 +27,11 @@ const AllStudents = () => {
                 </thead>
                 <tbody>
                     {
-                        students?.map((stu, index) => (
-                            <tr key={stu?._id}>
+                        teachers?.map((teacher, index) => (
+                            <tr key={teacher?._id}>
                                 <td className="border px-4 py-2 text-center">{index + 1}</td>
-                                <td className="border px-4 py-2 text-center">{stu?.name}</td>
-                                <td className="border px-4 py-2 text-center">{stu?.email}</td>
+                                <td className="border px-4 py-2 text-center">{teacher?.name}</td>
+                                <td className="border px-4 py-2 text-center">{teacher?.email}</td>
                             </tr>
                         ))
                     }
@@ -43,4 +41,4 @@ const AllStudents = () => {
     );
 };
 
-export default AllStudents;
+export default AllTeachers;
