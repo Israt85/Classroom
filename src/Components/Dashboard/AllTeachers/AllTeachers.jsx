@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 const AllTeachers = () => {
     const [teachers,setTeachers]= useState();
     useEffect(()=>{
-        axios.get('http://localhost:5000/user')
+        axios.get('https://classroom-server-azure.vercel.app/user')
         .then(res => {
             console.log(res.data);
             // Filter out any users with the role of 'Admin'

@@ -26,7 +26,7 @@ const Registration = () => {
                    role: data.role,
                 }
                 
-                axios.post('http://localhost:5000/user', userInfo)
+                axios.post('https://classroom-server-azure.vercel.app/user', userInfo)
                 .then(res =>{
                    if(res.data.insertedId){
                        console.log('user added');

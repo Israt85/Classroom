@@ -18,7 +18,7 @@ const ClassRoom = () => {
             endtime: data.endtime,
             days: data.days
         }
-        axios.post('http://localhost:5000/class',classInfo )
+        axios.post('https://classroom-server-azure.vercel.app/class',classInfo )
         .then(res=>{
             if(res.data.insertedId){
                 console.log('Classroom added');

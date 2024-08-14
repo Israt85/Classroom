@@ -7,7 +7,7 @@ const AllStudents = () => {
     const [students, setStudents] = useState([]);
     
     useEffect(() => {
-        axios.get('http://localhost:5000/user')
+        axios.get('https://classroom-server-azure.vercel.app/user')
             .then(res => {
                 console.log(res.data);
                 // Filter out any users with the role of 'Admin'
@@ -33,7 +33,7 @@ const AllStudents = () => {
             if (result.isConfirmed) {
 
 
-                axios.delete(`http://localhost:5000/user/${user._id}`)
+                axios.delete(`https://classroom-server-azure.vercel.app/user/${user._id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                             Swal.fire({

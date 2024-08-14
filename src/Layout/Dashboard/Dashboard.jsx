@@ -5,7 +5,7 @@ import { AuthContext } from '../../Provider/AuthProvider';
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext); // Get user from context
-    const admin= user?.email=='principal@classroom.com'
+    const admin = user?.email == 'principal@classroom.com'
     const [students, setStudents] = useState([]);
     const [userRole, setUserRole] = useState('');
 
@@ -13,14 +13,14 @@ const Dashboard = () => {
         // Fetch user data from MongoDB
         const fetchStudents = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/user');
+                const response = await axios.get('https://classroom-server-azure.vercel.app/user');
                 console.log(response.data);
-                
+
                 // Filter out students based on user role
                 const filteredStudents = userRole === 'Admin'
                     ? response.data // Admin sees all students
                     : response.data.filter(stu => stu.role !== 'Admin'); // Non-admins see only non-admin students
-                
+
                 setStudents(filteredStudents);
             } catch (err) {
                 console.log(err);
@@ -44,12 +44,27 @@ const Dashboard = () => {
                             <Link to='/dashboard/allstudent'><li className='list-none py-4'>All Students</li></Link>
                             <Link to='/dashboard/allteacher'><li className='list-none py-4'>All Teachers</li></Link>
                             <Link to='/dashboard/createclassroom'><li className='list-none py-4'>Create ClassRoom</li></Link>
+                            <Link to='/'><li className='list-none py-4'>Home</li></Link>
                         </>
                     )
                 }
                 {
                     !admin && (
-                        <Link to='/dashboard/allstudent'><li className='list-none py-4'>All Students</li></Link>
+                        <div>
+                            <Link to='/dashboard/allstudent'><li className='list-none py-4'>All Students</li></Link>
+                            <Link to='/'><li className='list-none py-4'>Home</li></Link>
+
+                        </div>
+
+                    )
+                }
+                {
+                    userRole=='Teacher' && (
+                        <div>
+                            <Link to='/dashboard/allstudent'><li className='list-none py-4'>All Students</li></Link>
+                            <Link to='/'><li className='list-none py-4'>Home</li></Link>
+
+                        </div>
                     )
                 }
             </div>
